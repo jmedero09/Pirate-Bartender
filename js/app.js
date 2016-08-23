@@ -2,144 +2,38 @@
 
 $(document).ready(function(){
 
-// var ask = ['Do ye like yer drinks strong?','Do ye like it with a salty tang?','Are ye a lubber who likes it bitter?','Would ye like a bit of sweetness with yer poison?','Are ye one for a fruity finish?'];
-// var myDrink = [];
-// var currentQuestion = 0;
-
-// function prefrence(question,answer){
-
-// 	this.prefrenceQuestion = question;
-
-// 	this.answer = answer;
-// }
-// function pantry(ingredients){
-
-// 	this.ingredients = ingredients;
-// }
-
-// function drink(mixture){
-
-// 	this.mix = mixture;
-
-// }
-//  var strong = new pantry(['Glug of rum ','slug of whisky ','splash of gin ']);
-
-//  var salty = new pantry(['Olive on a stick ','salt-dusted rim ','rasher of bacon ']);
-
-//  var bitter = new pantry(['Shake of bitters ','splash of tonic ','twist of lemon peel ']);
-
-//  var sweet = new pantry(['Sugar cube ','spoonful of honey ','splash of cola ']);
-
-//  var Fruity = new pantry(['Slice of orange ','dash of cassis ','cherry on top ']);
-
-//  function showQuestion(){
-
-// 	$('p').append(ask[currentQuestion]);
-
-// }
-//  showQuestion();
-
-//  function mixDrink(drinkPref){
-
-//  	if(drinkPref.prefrenceQuestion ==="Do ye like yer drinks strong?"&& drinkPref.answer==='Yes'){
-
-//  		myDrink.push(strong.ingredients[Math.floor((Math.random() * 3) + 0)]);
-
-//  	} else if(drinkPref.prefrenceQuestion ==="Do ye like it with a salty tang?"&& drinkPref.answer==='Yes') {
-
-//   		myDrink.push(salty.ingredients[Math.floor((Math.random() * 3) + 0)]);
-		
-//  	} else if(drinkPref.prefrenceQuestion ==="Are ye a lubber who likes it bitter?"&& drinkPref.answer==='Yes') {
-
-//   		myDrink.push(bitter.ingredients[Math.floor((Math.random() * 3) + 0)]);
-		
-//  	} else if(drinkPref.prefrenceQuestion ==="Would ye like a bit of sweetness with yer poison?"&& drinkPref.answer==='Yes') {
-
-//   		myDrink.push(sweet.ingredients[Math.floor((Math.random() * 3) + 0)]);
-		
-//  	} else if(drinkPref.prefrenceQuestion ==="Are ye one for a fruity finish?"&& drinkPref.answer==='Yes') {
-
-//   		myDrink.push(Fruity.ingredients[Math.floor((Math.random() * 3) + 0)]);
-		
-//  	} 
-
-//  	var mixture = new drink(myDrink);
-
-//  	if(currentQuestion >= ask.length){
-//  		$('p').empty();
-
-//  		$('a').empty();
-
-//  		$('span').empty();
-
-//  		$('p').append("<span id = 'blue'>Ye Drink Be a:</span> " + mixture.mix);
-
-//  		$('#blurb').css("background-color", "#6b1d1d");
-
-//  	}
-
-//  }
-
-// 	$('a').click(function(event){
-
-// 		event.preventDefault();
-
-// 		var text = $(this).text();
-
-// 		$('#bartender-question').empty();
-
-// 		var drinkPrefrence = new prefrence(ask[currentQuestion],text);
-
-// 		currentQuestion++;
-
-// 		showQuestion();
-
-// 		mixDrink(drinkPrefrence);
-
-
-// 	});
-
 	//Pantry------------------------------------------------------------------------------------
 
 	var Pantry = function() {
 
-	 	this.strong = ['Glug of rum ','slug of whisky ','splash of gin '];
+	 	this.strong = ['Glug of rum','slug of whisky','splash of gin'];
 
-		this.salty = ['Olive on a stick ','salt-dusted rim ','rasher of bacon '];
+		this.salty = ['Olive on a stick','salt-dusted rim','rasher of bacon'];
 
-	 	this.bitter = ['Shake of bitters ','splash of tonic ','twist of lemon peel '];
+	 	this.bitter = ['Shake of bitters','splash of tonic','twist of lemon peel'];
 
-	 	this.sweet = ['Sugar cube ','spoonful of honey ','splash of cola '];
+	 	this.sweet = ['Sugar cube','spoonful of honey','splash of cola'];
 
-	 	this.fruity = ['Slice of orange ','dash of cassis ','cherry on top '];
+	 	this.fruity = ['Slice of orange','dash of cassis','cherry on top'];
 	};
+
 	//Ingredients------------------------------------------------------------------------------------
 
-	var Ingredients = function(){
+	var Ingredients = function() {
 
 		Pantry.call(this);
 
-		this.preferences = {
-
-			strong : false,
-
-			salty : false,
-
-			bitter : false,
-
-			sweet : false,
-
-		 	fruity : false
-		}
+		this.preferences = {}
 
 	}
 
-	Ingredients.prototype = Object.create(Pantry.prototype);//
+	Ingredients.prototype = Object.create(Pantry.prototype);
 
 	Ingredients.prototype.constructor = Ingredients;
 
 	//Drink------------------------------------------------------------------------------------
-	var Drink = function(){
+
+	var Drink = function() {
 
 		Ingredients.call(this);
 
@@ -150,7 +44,7 @@ $(document).ready(function(){
 
 	Drink.prototype.constructor = Drink;
 
-	Drink.prototype.creatDrink = function(){
+	Drink.prototype.creatDrink = function() {
 
 		for(var prop in this.preferences) {
 
@@ -164,12 +58,14 @@ $(document).ready(function(){
 			}
 
 		}
+
 	return this.drink;
+
 	}
 
 	//Bartender------------------------------------------------------------------------------------
 
-	 var Bartender = function(){
+	 var Bartender = function() {
 
 	 	Drink.call(this);
 
@@ -185,18 +81,19 @@ $(document).ready(function(){
 
 	Bartender.prototype.constructor = Bartender;
 
-	Bartender.prototype.askQuestion = function(){
+	Bartender.prototype.askQuestion = function() {
 
 	 	$('p').append(this.questions[this.currentQuestion]);
 	}
 
-	 Bartender.prototype.init = function(){
+	 Bartender.prototype.init = function() {
 
 		this.askQuestion();
 	}
-	 Bartender.prototype.display = function(){
 
-		if(this.currentQuestion > this.questions.length-1 ){
+	 Bartender.prototype.display = function() {
+
+		if(this.currentQuestion > this.questions.length-1 ) {
 
 			$('p').empty();
 
@@ -204,17 +101,17 @@ $(document).ready(function(){
 
 			$('span').empty();
 
-			$('p').append("<span id = 'blue'>Ye Drink Be a:</span> " + this.creatDrink());
+			$('p').append("<span id = 'blue'>Ye Drink Be a:</span> " + this.creatDrink().join(", "));
 
 			$('#blurb').css("background-color", "#6b1d1d");		
 		}
-
 	}
-	Bartender.prototype.clickHandler = function(){
+
+	Bartender.prototype.clickHandler = function() {
 
 		var self = this;
 
-		$('a').click(function(event){
+		$('a').click(function(event) {
 		
 			event.preventDefault();
 
@@ -226,11 +123,7 @@ $(document).ready(function(){
 
 				self.preferences[self.types[self.currentQuestion]] = true;
 
-			} else {
-
-				self.preferences[self.types[self.currentQuestion]] = false;
-
-			}
+			} 
 			
 			self.currentQuestion++;
 
@@ -247,4 +140,5 @@ $(document).ready(function(){
 		bartender.init();
 
 		bartender.clickHandler();
+
 });
