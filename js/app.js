@@ -152,7 +152,19 @@ Drink.prototype.constructor = Drink;
 
 Drink.prototype.creatDrink = function(){
 
+	for(var prop in this.preferences) {
 
+		if(this.currentQuestion > this.questions.length-1 ) {
+			
+			if(this.preferences[prop] === true){
+
+				this.drink.push(this[prop][Math.floor((Math.random() * 3) + 0)]);
+
+			}
+		}
+
+	}
+return this.drink;
 }
 
 //Bartender------------------------------------------------------------------------------------
@@ -182,7 +194,22 @@ Bartender.prototype.askQuestion = function(){
 
 	this.askQuestion();
 }
+ Bartender.prototype.display = function(){
 
+	if(this.currentQuestion > this.questions.length-1 ){
+
+		$('p').empty();
+
+		$('a').empty();
+
+		$('span').empty();
+
+		$('p').append("<span id = 'blue'>Ye Drink Be a:</span> " + this.creatDrink());
+
+		$('#blurb').css("background-color", "#6b1d1d");		
+	}
+
+}
 Bartender.prototype.clickHandler = function(){
 
 	var self = this;
@@ -204,20 +231,12 @@ Bartender.prototype.clickHandler = function(){
 		self.preferences[self.types[self.currentQuestion]] = false;
 
 	}
-
-	// console.log(self.types[self.currentQuestion]);
-
-	// console.log(self.preferences[self.types[self.currentQuestion]]);
 	
 	self.currentQuestion++;
 
 	self.askQuestion(self.types[self.currentQuestion],text);
 
-	//console.log(self.preferences)
-
-	// console.log(self);
-
-
+	bartender.display();
 
 });
 
@@ -234,7 +253,6 @@ bartender.clickHandler();
 
 
 
-	
 
 
 
